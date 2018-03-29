@@ -42,4 +42,31 @@ header h1 {
 	border: 0px;
 }
 
+/*================*/
+/*Song Info Header*/
+/*================*/
+
+.song-info-header {
+	font-family: "Work Sans", Helvetica, sans-serif;
+	font-size: 1rem;
+	background-color: rgb(104, 0, 255);
+	height: 50px;
+}
+
+.song-info-header {
+	color: #fff;
+}
+
+/*================*/
+/*Song Information*/
+/*================*/
+
+
+
+
+
+
+
+
+
 
