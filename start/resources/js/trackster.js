@@ -1,12 +1,14 @@
 var Trackster = {};
-const API_KEY = '975c4032896f16103388baa23cf193f3';
+const API_KEY = '';
 
 /*
   Given an array of track data, create the HTML for a Bootstrap row for each.
   Append each "row" to the container in the body to display all tracks. 
 */
 Trackster.renderTracks = function(tracks) {
+	 for (var i = 0; i < data.length; i++) {
 
+	 }
 };
 
 /*
