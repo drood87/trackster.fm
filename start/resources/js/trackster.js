@@ -1,7 +1,7 @@
 var Trackster = {};
 const API_KEY = '975c4032896f16103388baa23cf193f3';
 var trackResults;
-var trackDuration;
+// var trackDuration;
 var i;
 
 /*
@@ -12,9 +12,10 @@ Trackster.renderTracks = function(tracks) {
 	 for (i = 0; i <= (trackResults.length)-1; i++) {
 	 	
  			var mediaAlbumArt = trackResults[i].image[1]["#text"];
+ 			var trackDuration;
 
  			$.ajax({
-							url: 'http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key='+API_KEY+'&artist=' + trackResults[i].artist + '&track=' + trackResults[i].name + '&format=json',
+							url: 'https://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key='+API_KEY+'&artist=' + trackResults[i].artist + '&track=' + trackResults[i].name + '&format=json',
 							dataType: 'jsonp',
 							success: function(d) {
 								console.log("Success", d.track.duration);
@@ -49,7 +50,7 @@ Trackster.renderTracks = function(tracks) {
         					  '<span>' + trackResults[i].listeners + '</span>'+
       						'</div>'+
       						'<div class="col-md-1" id="duration">'+
-      							'<span>' + parseFloat(trackDuration) + '</span>'+
+      							'<span>' + trackDuration + '</span>'+
       						'</div>'+ 
       					'</div>'+
   					   '</div>';  					   
@@ -66,7 +67,7 @@ Trackster.renderTracks = function(tracks) {
 Trackster.searchTracksByTitle = function(title) {
 		
 		$.ajax({
-					url: 'http://ws.audioscrobbler.com/2.0/?method=track.search&track='+($("#inputField").val())+'&api_key='+API_KEY+'&format=json',
+					url: 'https://ws.audioscrobbler.com/2.0/?method=track.search&track='+($("#inputField").val())+'&api_key='+API_KEY+'&format=json',
 					dataType: 'jsonp',
 					success: function(data) {
 						console.log("Success!", data);
