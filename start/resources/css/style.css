@@ -65,14 +65,14 @@ header h1 {
 /*Song Information*/
 /*================*/
 
-#song-details {
+.song-details {
 	padding-top: 5px;
 	padding-bottom: 5px;
 	border-bottom: 2px solid rgb(204, 204, 204);
 	height: 6rem;	
 }
 
-#song-details:hover {
+.song-details:hover {
 	background-color: rgb(239, 237, 242);
 }
 
