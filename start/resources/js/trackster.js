@@ -4,18 +4,18 @@ var trackResults;
 var trackDuration;
 
 $(document).ready(function() {
-	$("#submitButton").click(function() {
+	$('#submitButton').click(function() {
 		Trackster.searchTracksByTitle($("#inputField").val());
 		$('.detailContainer').empty();			
 	})
-	function pressEnter (event) {
-		var enter = event.keyCode;
-		if (enter == 27) {
-			Trackster.searchTracksByTitle($("#inputField").val());
-			$('.detailContainer').empty();
+	$('#inputField').keypress(function(e) {
+		if (e.which == 13) {
+			$('#submitButton').click();
 		}
-	}
+	}) 			
 })
+
+
 
 /*
   Given an array of track data, create the HTML for a Bootstrap row for each.
@@ -30,36 +30,34 @@ for (var i = 0; i <= (trackResults.length)-1; i++) {
         url: 'https://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key='+API_KEY+'&artist=' + trackResults[i].artist + '&track='+ trackResults[i].name+ '&format=json',              
         dataType: 'jsonp',
         success: function(d) {
-            console.log("Success", d.track.duration);
-            let trackDuration = d.track.duration;
+            		console.log("Success", d.track.duration);
+            		let trackDuration = d.track.duration;
 
-            var $tracks = '<div class="container-fluid song-details">'+
-                  '<div class="row align-items-center h-100">'+                                 
-                    '</div>'+
-                    '<div class="col-md-1">'+
-                      '<span>' + parseFloat(i+1) + '</span>'+
-                    '</div>'+
-                    '<div class="col-md-3">'+
-                      '<span>' + trackResults[i].name + '</span>'+
-                    '</div>'+
-                    '<div class="col-md-2">'+
-                      '<span>' + trackResults[i].artist + '</span>'+
-                    '</div>'+
-                    '<div class="col-md-2">'+
-                      '<img src="' + mediaAlbumArt + '" />'+
-                    '</div>'+
-                    '<div class="col-md-1">'+
-                      '<span>' + trackResults[i].listeners + '</span>'+
-                    '</div>'+
-                    '<div class="col-md-1" class="duration">'+
-                        '<span>' + trackDuration  + '</span>'
-                    '</div>'+ 
-                '</div>'+
-               '</div>';                       
+            		var $tracks = '<div class="container-fluid song-details">'+
+					                  '<div class="row align-items-center h-100">'+                                 
+					                    '</div>'+
+					                    '<div class="col-md-1">'+
+					                      '<span>' + parseFloat(i+1) + '</span>'+
+					                    '</div>'+
+					                    '<div class="col-md-3">'+
+					                      '<span>' + trackResults[i].name + '</span>'+
+					                    '</div>'+
+					                    '<div class="col-md-2">'+
+					                      '<span>' + trackResults[i].artist + '</span>'+
+					                    '</div>'+
+					                    '<div class="col-md-2">'+
+					                      '<img src="' + mediaAlbumArt + '" />'+
+					                    '</div>'+
+					                    '<div class="col-md-1">'+
+					                      '<span>' + trackResults[i].listeners + '</span>'+
+					                    '</div>'+
+					                    '<div class="col-md-1" class="duration">'+
+					                        '<span>' + trackDuration  + '</span>'
+					                    '</div>'+ 
+					                  '</div>'+
+					               '</div>';                       
 
-           detailContainer.append($tracks);
-
-           
+           				detailContainer.append($tracks);           
         },
         error: function(err) {
             console.log("Error", err);
