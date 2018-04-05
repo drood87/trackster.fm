@@ -27,31 +27,37 @@ $(document).ready(function() {
 Trackster.renderTracks = function(tracks) {
 let detailContainer = $('.detailContainer');
 for (var i = 0; i <= (trackResults.length)-1; i++) {
-    var mediaAlbumArt = trackResults[i].image[1]["#text"];
+    var mediaAlbumArt = trackResults[i].image[1]["#text"];    
 
     ((i) => $.ajax({
-        url: 'https://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key='+API_KEY+'&artist=' + trackResults[i].artist + '&track='+ trackResults[i].name+ '&format=json',              
+        url: 'https://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key='+API_KEY+'&artist=' + trackResults[i].artist + '&track='+ trackResults[i].name + '&format=json',              
         dataType: 'jsonp',
         success: function(d) {
             		console.log("Success", d.track.duration);
             		let trackDuration = d.track.duration;
+            		var promises = []
+            		var popularity = numeral(trackResults[i].listeners);
 
-            		var $tracks = '<div class="container-fluid song-details">'+
-					                  '<div class="row align-items-center h-100">'+                                 
-					                    '<div class="col-md-1 offset-md-1">'+
-					                      '<span>' + parseFloat(i+1) + '</span>'+
+				    
+					var $tracks = '<div class="container-fluid song-details">'+
+					                  '<div class="row align-items-center h-100">'+ 
+					                  	'<div class="play-icon col-md-1 offset-md-1">'+
+        									'<a href="'+ trackResults[i].url + '" target="_blank"><i class="far fa-play-circle fa-lg"></i></a>'+
+      									'</div>'+                                
+					                    '<div class="col-md-1">'+
+					                      '<span>' + parseFloat(i+1)  + '</span>'+
 					                    '</div>'+
-					                    '<div class="col-md-3">'+
+					                    '<div class="col-md-2">'+
 					                      '<span>' + trackResults[i].name + '</span>'+
 					                    '</div>'+
 					                    '<div class="col-md-2">'+
 					                      '<span>' + trackResults[i].artist + '</span>'+
 					                    '</div>'+
-					                    '<div class="col-md-2">'+
+					                    '<div class="col-md-1">'+
 					                      '<img src="' + mediaAlbumArt + '" />'+
 					                    '</div>'+
 					                    '<div class="col-md-1">'+
-					                      '<span>' + trackResults[i].listeners + '</span>'+
+					                      '<span>' + popularity.format('0 ,0') + '</span>'+
 					                    '</div>'+
 					                    '<div class="col-md-1 col-style">'+
 					                        '<span>' + parseFloat(trackDuration/1000)  + '</span>'
