@@ -34,9 +34,10 @@ for (var i = 0; i <= (trackResults.length)-1; i++) {
         dataType: 'jsonp',
         success: function(d) {
             		console.log("Success", d.track.duration);
-            		let trackDuration = d.track.duration;
+            		let trackDuration = numeral((d.track.duration)/1000);
             		var promises = []
             		var popularity = numeral(trackResults[i].listeners);
+
 
 				    
 					var $tracks = '<div class="container-fluid song-details">'+
@@ -60,7 +61,7 @@ for (var i = 0; i <= (trackResults.length)-1; i++) {
 					                      '<span>' + popularity.format('0 ,0') + '</span>'+
 					                    '</div>'+
 					                    '<div class="col-md-1 col-style">'+
-					                        '<span>' + parseFloat(trackDuration/1000)  + '</span>'
+					                        '<span>' + trackDuration.format('00:00:00')  + '</span>'
 					                    '</div>'+ 
 					                  '</div>'+
 					               '</div>';                       
