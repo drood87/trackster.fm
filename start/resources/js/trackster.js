@@ -3,6 +3,14 @@ const API_KEY = '975c4032896f16103388baa23cf193f3';
 var trackResults;
 var trackDuration;
 
+function minTommss(minutes){
+	 var sign = minutes < 0 ? "-" : "";
+	 var min = Math.floor(Math.abs(minutes));
+	 var sec = Math.floor((Math.abs(minutes) * 60) % 60);
+	 return sign + (min < 10 ? "0" : "") + min + ":" + (sec < 10 ? "0" : "") + sec;
+}
+
+
 // click event for search
 
 $(document).ready(function() {
@@ -34,7 +42,7 @@ for (var i = 0; i <= (trackResults.length)-1; i++) {
         dataType: 'jsonp',
         success: function(d) {
             		console.log("Success", d.track.duration);
-            		let trackDuration = numeral((d.track.duration)/1000);
+            		let trackDuration = d.track.duration/100000;
             		var promises = []
             		var popularity = numeral(trackResults[i].listeners);
 
@@ -61,7 +69,7 @@ for (var i = 0; i <= (trackResults.length)-1; i++) {
 					                      '<span>' + popularity.format('0 ,0') + '</span>'+
 					                    '</div>'+
 					                    '<div class="col-md-1 col-style">'+
-					                        '<span>' + trackDuration.format('00:00:00')  + '</span>'
+					                        '<span>' + minTommss(trackDuration) + '</span>'
 					                    '</div>'+ 
 					                  '</div>'+
 					               '</div>';                       
